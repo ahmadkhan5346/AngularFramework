@@ -19,6 +19,8 @@ import {MatRadioModule} from '@angular/material/radio';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 import { HttpClientModule } from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
+import {MatPaginatorModule} from '@angular/material/paginator';
+import {MatSortModule} from '@angular/material/sort';
 
 @NgModule({
   declarations: [
@@ -32,7 +34,7 @@ import {MatTableModule} from '@angular/material/table';
     
     MatToolbarModule,MatIconModule,MatButtonModule,MatDialogModule,MatFormFieldModule,MatInputModule,
     MatSelectModule,MatDatepickerModule,MatNativeDateModule,MatRadioModule,ReactiveFormsModule,FormsModule,
-    HttpClientModule,MatTableModule
+    HttpClientModule,MatTableModule,MatPaginatorModule,MatSortModule
   ],
   providers: [],
   bootstrap: [AppComponent]
