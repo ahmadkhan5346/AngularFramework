@@ -13,7 +13,7 @@ import {MatTableDataSource} from '@angular/material/table';
 })
 export class AppComponent implements OnInit {
   title = 'angular13crud';
-  displayedColumns: string[] = ['productName', 'category', 'date', 'freshness', 'price', 'comment'];
+  displayedColumns: string[] = ['productName', 'category', 'date', 'freshness', 'price', 'comment', 'action'];
   dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
@@ -29,7 +29,11 @@ export class AppComponent implements OnInit {
   openDialog() {
     this.dialog.open(DialogComponent, {
       width:'40%'
-    });
+    }).afterClosed().subscribe(val=>{
+      if(val == 'save'){
+        this.getAllProducts();
+      }
+    })
   }
   getAllProducts(){
     this.api.getProduct()
@@ -43,6 +47,28 @@ export class AppComponent implements OnInit {
       },
       error:(err)=>{
         alert("Error while fetching the records!!")
+      }
+    })
+  }
+  editProduct(row : any){
+    this.dialog.open(DialogComponent,{
+      width: '30%',
+      data:row
+    }).afterClosed().subscribe(val=>{
+      if(val==='update'){
+        this.getAllProducts();
+      }
+    })
+  }
+  deleteProduct(id:number){
+    this.api.deleteProduct(id)
+    .subscribe({
+      next:(res)=>{
+        alert("Product Deleted Successfully!!");
+        this.getAllProducts();
+      },
+      error:()=>{
+        alert("Error while Deleting the product!!")
       }
     })
   }
